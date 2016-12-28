@@ -1,0 +1,28 @@
+{
+  "name": "twitter-clone",
+  "version": "0.1.0",
+  "description": "Node.js MySQL Twitter Clone",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "MySQL"
+  ],
+  "author": "Yuichi Hagio <yhagio87@gmail.com> (http://github.com/yhagio)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "moment": "^2.17.1",
+    "mysql": "^2.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "nodemon": "^1.11.0"
+  }
+}
