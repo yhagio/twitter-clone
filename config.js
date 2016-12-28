@@ -1,12 +1,10 @@
-'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 
-var express = require("express");
-var bodyParser = require('body-parser');
-var compression = require('compression');
-var helmet = require('helmet');
-var cookieParser = require('cookie-parser');
-
-module.exports = function(app) {
+module.exports = (app) => {
   app.set('views', './views');
   app.set('view engine', 'ejs');
   app.use(express.static('./public'));

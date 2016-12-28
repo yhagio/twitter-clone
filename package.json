@@ -4,8 +4,9 @@
   "description": "Node.js MySQL Twitter Clone",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "export NODE_ENV=development && nodemon index.js",
+    "test": "",
+    "lint": "eslint .; exit 0"
   },
   "keywords": [
     "Node.js",
@@ -25,6 +26,10 @@
   },
   "devDependencies": {
     "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0"
   }

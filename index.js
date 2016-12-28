@@ -1,31 +1,16 @@
-'use strict'
+const express = require('express');
 
-var express = require("express");
-var mysql = require('mysql');
+const app = express();
 
-var app = express();
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'twitclone'
-});
-
-connection.connect(function(err) {
-  if(err) {
-    console.log('DB Connection Error:', err);
-    return;
-  }
-
-  console.log('Connected to the database.');
-
-  app.listen(8080, function() {
-    console.log('Web server listening on port 8080!');
-  });
-});
+// Database connection setup
+require('./server/database');
 
 // Configuration
 require('./config')(app);
 
 // Routes
-require('./routes')(app, connection);
+require('./server/routes')(app);
+
+app.listen(8080, () => {
+  console.log('Web server listening on port 8080!');
+});
