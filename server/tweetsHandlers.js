@@ -5,7 +5,7 @@ const connection = require('./database');
 function getTweets(req, res) {
   // console.log('[USER]\n', req.user)
   const query = `
-    SELECT t.body, t.created_at, u.handle
+    SELECT t.id, t.body, t.created_at, u.handle
     FROM Tweets as t
     LEFT JOIN Users as u
     ON t.user_id = u.id
@@ -30,7 +30,7 @@ function getTweets(req, res) {
 }
 
 function postTweet(req, res) {
-  console.log('User', req.user, req.body);
+  // console.log('User', req.user, req.body);
   const query = 'INSERT INTO Tweets(user_id, body) VALUES(?, ?)';
   const userId = req.user.id;
   const body = req.body.body;
@@ -50,9 +50,16 @@ function postTweet(req, res) {
 }
 
 function getEditTweet(req, res) {
-  const query = 'SELECT * FROM Tweets WHERE id = ?';
   const id = req.params.id;
-  connection.query(query, [id], (err, results) => {
+  const userId = req.user.id;
+  const query = `
+    SELECT t.id, t.body, t.created_at, u.handle
+    FROM Tweets as t
+    LEFT JOIN Users as u
+    ON t.user_id = ${userId} AND t.id = ${id}
+  `;
+
+  connection.query(query, (err, results) => {
     if (err) {
       console.error(err);
       res.redirect('/');
@@ -66,6 +73,11 @@ function getEditTweet(req, res) {
     }
 
     const tweet = results[0];
+    if (!tweet.handle) {
+      res.redirect('/');
+      return;
+    }
+
     tweet.time_from_now = moment(tweet.created_at).fromNow();
 
     res.render('tweet-edit', { tweet: results[0] });

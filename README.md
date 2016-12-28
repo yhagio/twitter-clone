@@ -29,3 +29,10 @@ Start Redis server
 redis-server
 redis-cli # Shell command
 ```
+
+### Run Locally
+
+```
+redis-server
+npm run start
+```

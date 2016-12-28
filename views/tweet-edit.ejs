@@ -9,12 +9,6 @@
     <main>
       <%- include('_tweet', { tweet: tweet }); %>
       <form id="tweet-form" action="/tweets/<%= tweet.id %>/update" method="POST">
-        <input
-          id="tweet-form-handle"
-          type="text"
-          name="handle"
-          placeholder="Twitter handle"
-          value="<%= tweet.handle %>" />
         <textarea
           id="tweet-form-body"
           name="body"
