@@ -3,11 +3,18 @@ const moment = require('moment');
 const connection = require('./database');
 
 function getTweets(req, res) {
-  // console.log('USER', req.user)
-  const query = 'SELECT * FROM Tweets ORDER BY created_at DESC';
-  const tweetsCreated = req.cookies.tweets_created || [];
+  // console.log('[USER]\n', req.user)
+  const query = `
+    SELECT t.body, t.created_at, u.handle
+    FROM Tweets as t
+    LEFT JOIN Users as u
+    ON t.user_id = u.id
+    ORDER BY created_at DESC
+  `;
+  // const tweetsCreated = req.cookies.tweets_created || [];
 
   connection.query(query, (err, tweets) => {
+    // console.log('[Tweets]', tweets);
     if (err) {
       console.error(err);
       return;
@@ -16,7 +23,7 @@ function getTweets(req, res) {
     for (let i = 0; i < tweets.length; i++) {
       const tweet = tweets[i];
       tweet.time_from_now = moment(tweet.created_at).fromNow();
-      tweet.isEditable = tweetsCreated.includes(tweet.id);
+      tweet.isEditable = tweets[i].handle === req.user.handle;
     }
     res.render('tweets', { tweets, user: req.user });
   });
@@ -24,23 +31,22 @@ function getTweets(req, res) {
 
 function postTweet(req, res) {
   console.log('User', req.user, req.body);
-  res.redirect('/');
-  // const query = 'INSERT INTO Tweets(user_id, body) VALUES(?, ?)';
-  // const user_id = req.body.user_id;
-  // const body = req.body.body;
+  const query = 'INSERT INTO Tweets(user_id, body) VALUES(?, ?)';
+  const userId = req.user.id;
+  const body = req.body.body;
   // const tweetsCreated = req.cookies.tweets_created || [];
 
-  // connection.query(query, [user_id, body], (err, results) => {
-  //   if (err) {
-  //     console.error(err);
-  //     return;
-  //   }
+  connection.query(query, [userId, body], (err, results) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
 
-  //   tweetsCreated.push(results.insertId);
-  //   res.cookie('tweets_created', tweetsCreated, { httpOnly: true });
+    // tweetsCreated.push(results.insertId);
+    // res.cookie('tweets_created', tweetsCreated, { httpOnly: true });
 
-  //   res.redirect('/');
-  // });
+    res.redirect('/');
+  });
 }
 
 function getEditTweet(req, res) {
