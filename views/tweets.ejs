@@ -5,7 +5,16 @@
     <title>Twitter Clone</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      <ul>
+        <% if (user) { %>
+          <a href='/logout'>Log out</a>
+        <% } else { %>
+          <a href='/signup'>Sign Up</a>
+          <a href='/login'>Log in</a>
+        <% } %>
+      </ul>
+    </header>
     <main>
       <form id="tweet-form" action="/tweets/create" method="POST">
         <input

@@ -21,3 +21,11 @@ Stop / Restart
 mysql.server stop
 mysql.server restart 
 ```
+
+
+Start Redis server
+
+```sh
+redis-server
+redis-cli # Shell command
+```

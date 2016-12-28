@@ -1,13 +1,25 @@
+DROP DATABASE twitclone;
 CREATE DATABASE twitclone;
 
 USE twitclone;
 
-CREATE TABLE Tweets (
-  id INT NOT NULL AUTO_INCREMENT,
-  body TEXT NOT NULL,
-  handle VARCHAR(15) NOT NULL,
+CREATE TABLE Users (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
+  email VARCHAR(30) NOT NULL UNIQUE,
+  handle VARCHAR(15) NOT NULL UNIQUE,
+  password TEXT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO Tweets(handle, body) VALUES('DonkkaShane', 'Having a great time teaching this Twitter clone course!');
+CREATE TABLE Tweets (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
+  body TEXT NOT NULL,
+  user_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+
+
+-- INSERT INTO Tweets(handle, body) VALUES('yuichihagio', 'Having a great time!');

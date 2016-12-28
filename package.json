@@ -15,14 +15,19 @@
   "author": "Yuichi Hagio <yhagio87@gmail.com> (http://github.com/yhagio)",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.1",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
+    "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "express-session": "^1.14.2",
     "helmet": "^3.2.0",
     "moment": "^2.17.1",
-    "mysql": "^2.12.0"
+    "mysql": "^2.12.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^3.12.2",
