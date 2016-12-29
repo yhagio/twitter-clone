@@ -16,4 +16,3 @@ connection.connect((err) => {
 });
 
 module.exports = connection;
-mysql://bf0be003bac8ce:3aa0556c@us-cdbr-iron-east-04.cleardb.net/heroku_11bef46b16f23a8?reconnect=true
