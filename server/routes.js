@@ -1,19 +1,19 @@
-// const authUser = require('./auth-user');
 const tweetsHandlers = require('./tweetsHandlers');
 const usersHandlers = require('./usersHandlers');
+const isAuthed = require('./ensureAuthed');
 
 module.exports = (app) => {
   // Get tweets
   app.get('/', tweetsHandlers.getTweets);
 
   // Post a tweet
-  app.post('/tweets/create', tweetsHandlers.postTweet);
+  app.post('/tweets/create', isAuthed, tweetsHandlers.postTweet);
 
   // Display edit a tweet page
-  app.get('/tweets/:id([0-9]+)/edit', tweetsHandlers.getEditTweet);
+  app.get('/tweets/:id([0-9]+)/edit', isAuthed, tweetsHandlers.getEditTweet);
 
   // Update or Delete a tweet
-  app.post('/tweets/:id([0-9]+)/update', tweetsHandlers.updateDeleteTweet);
+  app.post('/tweets/:id([0-9]+)/update', isAuthed, tweetsHandlers.updateDeleteTweet);
 
   // Sign Up 
   app.get('/signup', usersHandlers.getSignup);

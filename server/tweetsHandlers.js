@@ -3,7 +3,7 @@ const moment = require('moment');
 const connection = require('./database');
 
 function getTweets(req, res) {
-  // console.log('[USER]\n', req.user)
+  // console.log('[USER]', req.user)
   const query = `
     SELECT t.id, t.body, t.created_at, u.handle
     FROM Tweets as t
@@ -11,7 +11,6 @@ function getTweets(req, res) {
     ON t.user_id = u.id
     ORDER BY created_at DESC
   `;
-  // const tweetsCreated = req.cookies.tweets_created || [];
 
   connection.query(query, (err, tweets) => {
     // console.log('[Tweets]', tweets);
@@ -23,7 +22,11 @@ function getTweets(req, res) {
     for (let i = 0; i < tweets.length; i++) {
       const tweet = tweets[i];
       tweet.time_from_now = moment(tweet.created_at).fromNow();
-      tweet.isEditable = tweets[i].handle === req.user.handle;
+      if (req.user) {
+        tweet.isEditable = tweets[i].handle === req.user.handle;
+      } else {
+        tweet.isEditable = false;
+      }
     }
     res.render('tweets', { tweets, user: req.user });
   });
@@ -56,7 +59,8 @@ function getEditTweet(req, res) {
     SELECT t.id, t.body, t.created_at, u.handle
     FROM Tweets as t
     LEFT JOIN Users as u
-    ON t.user_id = ${userId} AND t.id = ${id}
+    ON t.user_id = ${userId} AND t.id = ${id} AND u.id = ${userId}
+    WHERE u.handle IS NOT NULL
   `;
 
   connection.query(query, (err, results) => {
@@ -67,7 +71,7 @@ function getEditTweet(req, res) {
     }
 
     if (results.length === 0) {
-      console.error('No tweets found');
+      // console.error('No tweets found');
       res.redirect('/');
       return;
     }
@@ -80,16 +84,26 @@ function getEditTweet(req, res) {
 
     tweet.time_from_now = moment(tweet.created_at).fromNow();
 
-    res.render('tweet-edit', { tweet: results[0] });
+    res.render('tweet-edit', { tweet: results[0], user: req.user });
   });
 }
 
 function updateDeleteTweet(req, res) {
-  const updateQuery = 'UPDATE Tweets SET body = ?, user_id = ? WHERE id = ?';
-  const deleteQuery = 'DELETE FROM Tweets WHERE id = ?';
   const id = req.params.id;
-  const user_id = req.body.user_id;
+  const userId = req.user.id;
   const body = req.body.body;
+
+  const updateQuery = `
+  UPDATE Tweets
+  SET body = "${body}"
+  WHERE id = ${id} AND user_id = ${userId}
+  `;
+
+  const deleteQuery = `
+  DELETE FROM Tweets
+  WHERE id = ${id} AND user_id = ${userId}
+  `;
+
   const isDelete = req.body.delete_button !== undefined;
   const queryCallback = (err) => {
     if (err) {
@@ -100,10 +114,10 @@ function updateDeleteTweet(req, res) {
 
   if (isDelete) {
     // Delete
-    connection.query(deleteQuery, [id], queryCallback);
+    connection.query(deleteQuery, queryCallback);
   } else {
     // Update
-    connection.query(updateQuery, [body, user_id, id], queryCallback);
+    connection.query(updateQuery, queryCallback);
   }
 }
 
