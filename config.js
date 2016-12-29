@@ -18,7 +18,9 @@ module.exports = (app) => {
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use(session({
-    store: new RedisStore(),
+    store: new RedisStore({
+      url: process.env.REDIS_URL || ''
+    }),
     secret: 'SecretCodeIsHere',
     cookie: { maxAge: 1209600000 },
     resave: true,
