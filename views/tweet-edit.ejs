@@ -6,17 +6,17 @@
   </head>
   <body>
     <header>
-      <ul>
+      <ul class='header-list'>
         <% if (user) { %>
-          <a href='/'>Home</a>
-          <a href='/logout'>Log out</a>
+          <a class='list-item' href='/'>Home</a>
+          <a class='list-item' href='/logout'>Log out</a>
         <% } else { %>
-          <a href='/signup'>Sign Up</a>
-          <a href='/login'>Log in</a>
+          <a class='list-item' href='/signup'>Sign Up</a>
+          <a class='list-item' href='/login'>Log in</a>
         <% } %>
       </ul>
     </header>
-    <main>
+    <main class='main-box'>
       <%- include('_tweet', { tweet: tweet }); %>
       <form id="tweet-form" action="/tweets/<%= tweet.id %>/update" method="POST">
         <textarea

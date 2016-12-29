@@ -15,13 +15,14 @@ module.exports = (app) => {
   // Update or Delete a tweet
   app.post('/tweets/:id([0-9]+)/update', isAuthed, tweetsHandlers.updateDeleteTweet);
 
-  // Sign Up 
+  // Sign up
   app.get('/signup', usersHandlers.getSignup);
   app.post('/signup', usersHandlers.signupUser);
 
   // Log in
   app.get('/login', usersHandlers.getLogin);
   app.post('/login', usersHandlers.loginUser);
+
   // Log out
   app.get('/logout', usersHandlers.logoutUser);
 };

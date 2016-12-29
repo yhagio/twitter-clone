@@ -6,25 +6,27 @@
   </head>
   <body>
     <header>
-      <ul>
-        <a href='/'>Home</a>
-        <a href='/signup'>Sign Up</a>
-        <a href='/login'>Log in</a>
+      <ul class='header-list'>
+        <a class='list-item' href='/'>Home</a>
+        <a class='list-item' href='/signup'>Sign Up</a>
+        <a class='list-item' href='/login'>Log in</a>
       </ul>
     </header>
     <main>
-      <form id="user-form" action="/login" method="POST">
+      <form id="user-form" action="/login" method="POST" class='auth-form'>
         <input
           id="email"
+          class='auth-form-input'
           type="email"
           name="email"
           placeholder="Email">
         <input
           id="password"
+          class='auth-form-input'
           type="password"
           name="password"
           placeholder="Password">
-        <button id="signup-form-button">Log In</button>
+        <button id="signup-form-button" class='auth-button'>Log In</button>
       </form>
     </main>
   </body>

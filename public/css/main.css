@@ -8,7 +8,55 @@ header {
   height: 50px;
 }
 
-main {
+.header-list {
+
+}
+
+.list-item {
+  padding: 10px;
+  text-decoration: none;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+}
+
+/* Auth Form */
+.auth-form {
+  max-width: 400px;
+  margin: 80px auto 20px;
+}
+
+.auth-form-input {
+  display: block;
+  margin: 10px 0;
+  padding: 5px;
+  width: 95%;
+  height: 40px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.auth-button {
+  background-color: #1b95e0;
+  color: #fff;
+  width: 95%;
+  height: 40px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.edit-button {
+  padding: 5px 10px;
+  background-color: #f75859;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/*  MAIN */
+
+.main-box {
   width: 600px;
   margin: 60px auto 0px auto;
   background-color: #ffffff;
@@ -78,3 +126,4 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+

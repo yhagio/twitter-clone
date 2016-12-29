@@ -21,7 +21,6 @@ function signupUser(req, res) {
       console.error(err);
       return;
     }
-    console.log('[Signed Up User]', user);
     user.id = user.insertId;
     req.login(user, (error) => {
       if (error) {
@@ -41,25 +40,21 @@ function loginUser(req, res) {
   passport.authenticate('local', (err, user, info) => {
 
     if (err) {
-      console.error('[ERROR-loginUser-]', err);
+      console.error(err);
       return res.redirect('/login');
     }
 
     if (!user) {
-      console.error('---No User Found---');
       return res.redirect('/login');
     }
 
-    console.log('[USER-login-]', user.email);
     req.logIn(user, (err) => {
       if (err) {
-        console.error('[ERR-loginUser-]', err);
+        console.error(err);
         return res.redirect('/login');
       }
-      console.log('[Success Login]');
       return res.redirect('/');
     });
-
   })(req, res);
 }
 

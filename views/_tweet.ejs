@@ -6,6 +6,6 @@
   </p>
   <p><%= tweet.body %></p>
   <% if(tweet.isEditable) { %>
-    <p><a href="/tweets/<%= tweet.id %>/edit">Edit</a></p>
+    <p><a class='edit-button' href="/tweets/<%= tweet.id %>/edit">Edit</a></p>
   <% } %>
 </article>

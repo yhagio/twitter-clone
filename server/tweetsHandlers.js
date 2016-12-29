@@ -3,7 +3,6 @@ const moment = require('moment');
 const connection = require('./database');
 
 function getTweets(req, res) {
-  // console.log('[USER]', req.user)
   const query = `
     SELECT t.id, t.body, t.created_at, u.handle
     FROM Tweets as t
@@ -13,7 +12,6 @@ function getTweets(req, res) {
   `;
 
   connection.query(query, (err, tweets) => {
-    // console.log('[Tweets]', tweets);
     if (err) {
       console.error(err);
       return;
@@ -33,21 +31,15 @@ function getTweets(req, res) {
 }
 
 function postTweet(req, res) {
-  // console.log('User', req.user, req.body);
   const query = 'INSERT INTO Tweets(user_id, body) VALUES(?, ?)';
   const userId = req.user.id;
   const body = req.body.body;
-  // const tweetsCreated = req.cookies.tweets_created || [];
 
   connection.query(query, [userId, body], (err, results) => {
     if (err) {
       console.error(err);
       return;
     }
-
-    // tweetsCreated.push(results.insertId);
-    // res.cookie('tweets_created', tweetsCreated, { httpOnly: true });
-
     res.redirect('/');
   });
 }

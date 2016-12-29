@@ -6,22 +6,18 @@
   </head>
   <body>
     <header>
-      <ul>
+      <ul class='header-list'>
         <% if (user) { %>
-          <a href='/logout'>Log out</a>
+          <a class='list-item' href='/'>Home</a>
+          <a class='list-item' href='/logout'>Log out</a>
         <% } else { %>
-          <a href='/signup'>Sign Up</a>
-          <a href='/login'>Log in</a>
+          <a class='list-item' href='/signup'>Sign Up</a>
+          <a class='list-item' href='/login'>Log in</a>
         <% } %>
       </ul>
     </header>
-    <main>
+    <main class='main-box'>
       <form id="tweet-form" action="/tweets/create" method="POST">
-        <!--<input
-          id="tweet-form-handle"
-          type="text"
-          name="handle"
-          placeholder="Handle">-->
         <textarea
           id="tweet-form-body"
           name="body"
