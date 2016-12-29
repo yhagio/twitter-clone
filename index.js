@@ -13,5 +13,5 @@ require('./server/routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log('Web server listening on port 8080!');
+  console.log(`Web server listening on port ${PORT}`);
 });
