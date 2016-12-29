@@ -4,9 +4,13 @@ Node.js MySQL Twitter Clone
 
 http://qiita.com/hkusu/items/cda3e8461e7a46ecf25d
 
+MySQL 5.7 on macOS does not seem to work well ...
+
+Remove MySQL 5.7 if installed https://gist.github.com/vitorbritto/0555879fe4414d18569d
+Install MySQL 5.6 https://dev.mysql.com/downloads/file/?id=463209
+
+
 ```sh
-brew update
-brew install mysql
 mysql.server start
 ```
 
