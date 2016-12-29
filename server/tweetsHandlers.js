@@ -35,11 +35,14 @@ function postTweet(req, res) {
   const userId = req.user.id;
   const body = req.body.body;
 
+  console.log('[POST TWEET]\n', userId, body);
+
   connection.query(query, [userId, body], (err, results) => {
     if (err) {
-      console.error(err);
+      console.error('[POST TWEET ERROR]\n', err);
       return;
     }
+    console.log('[SUCCESS TWEET]')
     res.redirect('/');
   });
 }
