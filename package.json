@@ -4,9 +4,14 @@
   "description": "Node.js MySQL Twitter Clone",
   "main": "index.js",
   "scripts": {
-    "start": "export NODE_ENV=development && nodemon index.js",
+    "start:dev": "export NODE_ENV=development && nodemon index.js",
+    "start": "node index.js",
     "test": "",
     "lint": "eslint .; exit 0"
+  },
+  "engines": {
+    "node": "6.7.0",
+    "npm": "3.10.3"
   },
   "keywords": [
     "Node.js",

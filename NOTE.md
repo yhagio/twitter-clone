@@ -43,3 +43,12 @@ redis-cli # Shell command
 redis-server
 npm run start
 ```
+
+
+### Heroku
+
+Use ClearDB (MySQL) add-on
+
+http://stackoverflow.com/questions/9822313/remote-connect-to-cleardb-heroku-database
+
+Use Heroku Redis add-on
