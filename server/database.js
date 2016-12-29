@@ -18,18 +18,18 @@ const connection = mysql.createConnection({
 function startAndHandleDisconnection() {
   connection.connect((err) => {
     if (err) {
-      console.log('DB Connection Error:', err);
+      console.log('[DB Connection Error]:\n', err);
       return;
     }
     console.log('Connected to the database.');
   });
 
   connection.on('error', (err) => {
-    console.log('[DB ERROR]\n', err);
+    console.log('[DB ERROR]:\n', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
       startAndHandleDisconnection();
     } else {
-      console.error('[Some DB Error]\n', err);
+      console.error('[Some DB Error]:\n', err);
     }
   });
 }

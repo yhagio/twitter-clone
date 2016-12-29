@@ -21,12 +21,14 @@ function signupUser(req, res) {
       console.error(err);
       return;
     }
+    console.log('[SUCCESS signupUser]:\n', user);
     user.id = user.insertId;
     req.login(user, (error) => {
       if (error) {
-        console.error(error);
+        console.error('[Login Error on Signup]:\n', error);
         return;
       }
+      console.log('[User Logged-in after Sign up]');
       res.redirect('/');
     });
   });
@@ -40,17 +42,19 @@ function loginUser(req, res) {
   passport.authenticate('local', (err, user, info) => {
 
     if (err) {
-      console.error(err);
+      console.error('[Auth Error]\n', err);
       return res.redirect('/login');
     }
 
     if (!user) {
+      console.error('[Auth Error - No User -]');
       return res.redirect('/login');
     }
 
+    console.log('[Logging In ...]');
     req.logIn(user, (err) => {
       if (err) {
-        console.error(err);
+        console.error('[Log In Error]:\n', err);
         return res.redirect('/login');
       }
       return res.redirect('/');
